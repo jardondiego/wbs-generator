@@ -137,31 +137,20 @@ function App() {
           <center>
             <button
               style={{ marginBottom: '0.5rem' }}
-              onClick={(evt) => {
+              onClick={() => {
                 navigator.clipboard
                   .writeText(output)
                   .then(function () {
                     console.log('Text copied to clipboard');
-                    // You can optionally display a success message here
                   })
                   .catch(function (err) {
                     console.error('Error copying text to clipboard: ', err);
-                    // You can optionally display an error message here
                   });
               }}
             >
               COPY
             </button>
-            <br />
-            <div style={{ width: '120px' }}>
-              <center>
-                <GraphDiagram dotCode={output} />
-              </center>
-            </div>
           </center>
-          <Logger>
-            <GraphDiagram dotCode={output} />
-          </Logger>
         </React.Fragment>
       )}
     </div>

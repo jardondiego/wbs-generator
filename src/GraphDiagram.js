@@ -1,5 +1,6 @@
 import React from 'react';
 import { Graphviz } from 'graphviz-react';
+import { graphviz } from "d3-graphviz";
 
 function GraphDiagram({ dotCode }) {
   return (
