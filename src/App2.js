@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Graph from './Graph.js';
+import MonacoTextBox from './MonacoTextBox.js';
 
 function copyToClipboard(text) {
   navigator.clipboard
@@ -47,25 +48,10 @@ function generateDot(inputString) {
 }
 
 function App() {
-  const inputRef = useRef();
-
+  // create a ref to store the textInput DOM element / GO button
+  const goButton = useRef(null);
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [rawSVG, setRawSVG] = useState('');
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    const lastSVG = (document.getElementById('graphviz1') ?? {}).innerHTML;
-    console.log(lastSVG);
-    setRawSVG(lastSVG);
-  }, [output]);
-
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  };
 
   const generateGraphvizCode = () => {
     const output = generateDot(input);
@@ -86,28 +72,32 @@ function App() {
           generateGraphvizCode();
         }}
         onKeyDown={(evt) => {
-          if ((evt.keyCode == 10 || evt.keyCode == 13) && evt.ctrlKey) {
-            generateGraphvizCode();
-            return;
-          }
+          // if ((evt.keyCode == 10 || evt.keyCode == 13) && evt.ctrlKey) {
+          //   generateGraphvizCode();
+          //   return;
+          // }
 
-          if (evt.ctrlKey && evt.shiftKey && evt.key === 'C') {
-            evt.preventDefault();
-            copyToClipboard(output);
-            return;
-          }
+          // if (evt.ctrlKey && evt.shiftKey && evt.key === 'C') {
+          //   evt.preventDefault();
+          //   copyToClipboard(output);
+          //   return;
+          // }
 
-          if (evt.key === 'Escape') {
-            evt.target.blur();
-            return;
-          }
+          // if (evt.key === 'Escape') {
+          //   evt.target.blur();
+          //   return;
+          // }
         }}
       >
-        <textarea
-          ref={inputRef}
+        <MonacoTextBox
           value={input}
-          onChange={handleInputChange}
-          style={{ width: '100%', height: '150px', marginBottom: '0.5rem' }}
+          onChange={(newValue) => {
+            setInput(newValue);
+          }}
+          onTriggerSubmit={() => {
+            // click GO button :)
+            goButton.current.click();
+          }}
         />
         <br />
         <center>
@@ -116,6 +106,7 @@ function App() {
             style={{
               width: '72px',
             }}
+            ref={goButton}
           >
             GO
           </button>
