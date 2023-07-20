@@ -25,3 +25,5 @@ yarn-error.log*
 # Miscellaneous
 .DS_Store
 Thumbs.db
+
+.firebase/
