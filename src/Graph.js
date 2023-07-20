@@ -82,15 +82,13 @@ function DotGraphWithDownloadAndCopy({ dot, scale = 2 }) {
     <div>
       <center>
         <div ref={ref} />
-        <button style={{ marginTop: '1rem' }} onClick={downloadAsPng}>
-          EXPORT PNG
+        <button style={{ marginTop: '1rem', marginRight: '1rem' }} onClick={downloadAsPng}>
+          SAVE
         </button>
-        <br />
-        <button style={{ marginTop: '1rem' }} onClick={downloadAsSvg}>
+        {/* <button style={{ marginTop: '1rem', marginRight: '1rem' }} onClick={downloadAsSvg}>
           EXPORT SVG
-        </button>
-        <br />
-        <button style={{ marginTop: '1rem' }} onClick={copyToClipboard}>
+        </button> */}
+        <button style={{ marginTop: '1rem', marginRight: '0rem' }} onClick={copyToClipboard}>
           COPY
         </button>
       </center>

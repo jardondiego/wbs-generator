@@ -71,23 +71,6 @@ function App() {
           evt.preventDefault();
           generateGraphvizCode();
         }}
-        onKeyDown={(evt) => {
-          // if ((evt.keyCode == 10 || evt.keyCode == 13) && evt.ctrlKey) {
-          //   generateGraphvizCode();
-          //   return;
-          // }
-
-          // if (evt.ctrlKey && evt.shiftKey && evt.key === 'C') {
-          //   evt.preventDefault();
-          //   copyToClipboard(output);
-          //   return;
-          // }
-
-          // if (evt.key === 'Escape') {
-          //   evt.target.blur();
-          //   return;
-          // }
-        }}
       >
         <MonacoTextBox
           value={input}
@@ -114,7 +97,7 @@ function App() {
       </form>
       {output !== '' && (
         <React.Fragment>
-          <pre
+          {/* <pre
             style={{
               fontSize: '12px',
               fontFamily: 'Courier New, monospace',
@@ -142,7 +125,7 @@ function App() {
             >
               COPY
             </button>
-          </center>
+          </center> */}
           <Graph dot={`${output}`} />
         </React.Fragment>
       )}
