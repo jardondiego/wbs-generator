@@ -6,8 +6,13 @@ const MonacoTextBox = ({ value, onChange, onTriggerSubmit }) => {
     selectOnLineNumbers: true,
   };
 
+  // TODO: set default indentation to 2 spaces
+
   const editorDidMount = (editor, monaco) => {
     editor.focus();
+
+    // set default indentation to 2 spaces
+    editor.getModel().updateOptions({ tabSize: 2 });
 
     editor.addAction({
       id: 'submit',
