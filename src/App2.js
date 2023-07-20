@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Graph from './Graph.js';
+import MonacoTextBox from './MonacoTextBox.js';
 
 function copyToClipboard(text) {
   navigator.clipboard
@@ -51,17 +52,10 @@ function App() {
 
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-  const [rawSVG, setRawSVG] = useState('');
 
   useEffect(() => {
-    inputRef.current.focus();
+    // inputRef.current.focus();
   }, []);
-
-  useEffect(() => {
-    const lastSVG = (document.getElementById('graphviz1') ?? {}).innerHTML;
-    console.log(lastSVG);
-    setRawSVG(lastSVG);
-  }, [output]);
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -86,21 +80,21 @@ function App() {
           generateGraphvizCode();
         }}
         onKeyDown={(evt) => {
-          if ((evt.keyCode == 10 || evt.keyCode == 13) && evt.ctrlKey) {
-            generateGraphvizCode();
-            return;
-          }
+          // if ((evt.keyCode == 10 || evt.keyCode == 13) && evt.ctrlKey) {
+          //   generateGraphvizCode();
+          //   return;
+          // }
 
-          if (evt.ctrlKey && evt.shiftKey && evt.key === 'C') {
-            evt.preventDefault();
-            copyToClipboard(output);
-            return;
-          }
+          // if (evt.ctrlKey && evt.shiftKey && evt.key === 'C') {
+          //   evt.preventDefault();
+          //   copyToClipboard(output);
+          //   return;
+          // }
 
-          if (evt.key === 'Escape') {
-            evt.target.blur();
-            return;
-          }
+          // if (evt.key === 'Escape') {
+          //   evt.target.blur();
+          //   return;
+          // }
         }}
       >
         <textarea
@@ -108,6 +102,16 @@ function App() {
           value={input}
           onChange={handleInputChange}
           style={{ width: '100%', height: '150px', marginBottom: '0.5rem' }}
+        />
+        <MonacoTextBox
+          value={input}
+          onChange={(newValue) => {
+            console.log(newValue);
+            setInput(newValue);
+          }}
+          onTriggerSubmit={() => {
+            generateGraphvizCode();
+          }}
         />
         <br />
         <center>
