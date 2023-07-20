@@ -48,18 +48,10 @@ function generateDot(inputString) {
 }
 
 function App() {
-  const inputRef = useRef();
-
+  // create a ref to store the textInput DOM element / GO button
+  const goButton = useRef(null);
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
-
-  useEffect(() => {
-    // inputRef.current.focus();
-  }, []);
-
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  };
 
   const generateGraphvizCode = () => {
     const output = generateDot(input);
@@ -97,20 +89,14 @@ function App() {
           // }
         }}
       >
-        <textarea
-          ref={inputRef}
-          value={input}
-          onChange={handleInputChange}
-          style={{ width: '100%', height: '150px', marginBottom: '0.5rem' }}
-        />
         <MonacoTextBox
           value={input}
           onChange={(newValue) => {
-            console.log(newValue);
             setInput(newValue);
           }}
           onTriggerSubmit={() => {
-            generateGraphvizCode();
+            // click GO button :)
+            goButton.current.click();
           }}
         />
         <br />
@@ -120,6 +106,7 @@ function App() {
             style={{
               width: '72px',
             }}
+            ref={goButton}
           >
             GO
           </button>
