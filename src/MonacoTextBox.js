@@ -7,7 +7,7 @@ const MonacoTextBox = ({ value, onChange, onTriggerSubmit }) => {
   };
 
   const editorDidMount = (editor, monaco) => {
-    editor.focus();
+    // editor.focus();
     editor.getModel().updateOptions({ tabSize: 2 });
     editor.addAction({
       id: 'submit',
